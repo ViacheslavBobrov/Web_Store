@@ -1,0 +1,124 @@
+<fmt:setBundle basename="resources" var="bundle"/>
+<div class="col-md-3 filter_panel">
+					<p class="lead"></p>
+
+
+					<form action="searchProducts" role="form" method="get">
+						<div class="form-group">
+							<label for="name"><fmt:message key="filter.name" bundle="${bundle}" /></label>
+							<div class="controls">
+								<input type="text" class="form-control" id="name" name="name"
+									value="${formBean.name}">
+							</div>
+						</div>
+
+						
+						<div class="row">
+							<div class="form-group col-xs-6">
+								<label for="from"><fmt:message key="filter.min_price" bundle="${bundle}" />:</label>
+								<div class="controls">
+									<input type="text" class="form-control" id="from"
+										pattern="\d+(\.\d+)?" name="priceFrom"
+										value="${formBean.priceFrom}">
+								</div>
+							</div>
+							<div class="form-group col-xs-6">
+								<label for="to"><fmt:message key="filter.max_price" bundle="${bundle}" />:</label>
+								<div class="controls">
+									<input type="text" class="form-control" id="to" name="priceTo"
+										pattern="\d+(\.\d+)?" value="${formBean.priceTo}">
+								</div>
+							</div>
+						</div>
+						<div class="btn-group">
+							<button type="button"
+								class="btn btn-default dropdown-toggle navbar-btn"
+								data-toggle="dropdown">
+								<fmt:message key="filter.categories" bundle="${bundle}" /> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<ul>
+										<c:forEach var="category" items="${categories}">
+											<li><c:choose>
+													<c:when test="${formBean.categories.contains(category.id)}">
+														<input type="checkbox" name="categories"
+															value="${category.id}" checked>${category.name}
+												</c:when>
+													<c:otherwise>
+														<input type="checkbox" name="categories"
+															value="${category.id}">${category.name}
+											</c:otherwise>
+												</c:choose></li>
+										</c:forEach>
+									</ul>
+								</li>
+							</ul>
+						</div>
+						<div class="btn-group">
+							<button type="button"
+								class="btn btn-default dropdown-toggle navbar-btn"
+								data-toggle="dropdown">
+								<fmt:message key="filter.manufacturers" bundle="${bundle}" /> <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<ul>
+										<c:forEach var="manufacturer" items="${manufacturers}">
+											<li><c:choose>
+													<c:when
+														test="${formBean.manufacturers.contains(manufacturer.id)}">
+														<input type="checkbox" name="manufacturers"
+															value="${manufacturer.id}" checked>${manufacturer.name}
+												</c:when>
+													<c:otherwise>
+														<input type="checkbox" name="manufacturers"
+															value="${manufacturer.id}">${manufacturer.name}
+											</c:otherwise>
+												</c:choose></li>
+										</c:forEach>
+									</ul>
+								</li>
+							</ul>
+						</div>
+
+						<div class="form-group">
+							<label for="sel1"><fmt:message key="filter.sort_by" bundle="${bundle}" />:</label> <select class="form-control"
+								name="sort" id="sel1">
+								<option value="name"><fmt:message key="filter.name" bundle="${bundle}" /></option>
+								<c:choose>
+									<c:when test="${formBean.sortedBy eq 'price'}">
+										<option value="price" selected="selected">price</option>
+									</c:when>
+									<c:otherwise>
+										<option value="price"><fmt:message key="fiter.price" bundle="${bundle}" /></option>
+									</c:otherwise>
+								</c:choose>								
+							</select>
+						</div>
+						<div class="checkbox">
+							<label> <c:choose>
+									<c:when test="${formBean.descending}">
+										<input type="checkbox" name="isDescending" checked>
+									</c:when>
+									<c:otherwise>
+										<input type="checkbox" name="isDescending">
+									</c:otherwise>
+								</c:choose> <fmt:message key="filter.descending_order" bundle="${bundle}" />
+							</label>
+						</div>
+						<div class="form-group">
+							<label for="name"><fmt:message key="filter.size" bundle="${bundle}" />:</label>
+							<div class="controls">
+								<input type="number" class="form-control" id="size" name="size"
+									pattern="\d+" value="${formBean.limit}">
+							</div>
+						</div>
+						<div class="form-group">
+							<div class="controls">
+								<input type="submit" class="btn btn-default" value="Submit" />
+							</div>
+						</div>
+						<input type="hidden" name="page" value="1" />
+					</form>
+				</div>

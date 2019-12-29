@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<security xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="security.xsd">
+	<constraint>
+		<url-pattern>/orderCredentials</url-pattern>
+		<role>user</role>
+		<role>admin</role>
+	</constraint>
+	<constraint>
+		<url-pattern>/orderConfirmation</url-pattern>
+		<role>user</role>
+		<role>admin</role>
+	</constraint>
+	<constraint>
+		<url-pattern>/logout</url-pattern>
+		<role>user</role>
+		<role>admin</role>
+	</constraint>
+</security>
